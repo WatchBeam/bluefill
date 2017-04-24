@@ -7,8 +7,7 @@ interface Promise<T> {
      *
      * @see http://bluebirdjs.com/docs/api/finally.html
      */
-    finally(handler: (result?: T, error?: Error) => any): Promise<T>;
-
+    finally(handler: () => any): Promise<T>;
 
     /**
      * This is an extension to .catch to work more like catch-clauses in

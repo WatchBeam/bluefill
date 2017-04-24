@@ -1,10 +1,10 @@
 const originalCatch = Promise.prototype.catch;
 
 Object.assign(Promise.prototype, {
-    finally<T>(this: Promise<T>, handler: (result?: T, error?: Error) => any): Promise<T> {
+    finally<T>(this: Promise<T>, handler: () => any): Promise<T> {
         return this
-            .then(result => Promise.resolve(handler(result)).then(() => result))
-            .catch(err => Promise.resolve(handler(undefined, err)).then(() => { throw err; }));
+            .then(result => Promise.resolve(handler()).then(() => result))
+            .catch(err => Promise.resolve(handler()).then(() => { throw err; }));
     },
 
     catch<T>(this: Promise<T>, errorCls: Function, onReject: (error: any) => T | Promise<T>): Promise<T> {
