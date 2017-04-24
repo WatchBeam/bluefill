@@ -34,7 +34,7 @@ Object.assign(Promise.prototype, {
         return this.then(() => value);
     },
 
-    throw<T, U>(this: Promise<T>, err: U): Promise<never> {
+    throw<T>(this: Promise<T>, err: any): Promise<never> {
         return this.then(() => { throw err; });
     },
 
