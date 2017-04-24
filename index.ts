@@ -3,8 +3,8 @@ const originalCatch = Promise.prototype.catch;
 Object.assign(Promise.prototype, {
     finally<T>(this: Promise<T>, handler: () => any): Promise<T> {
         return this
-            .then(result => Promise.resolve(handler()).then(() => result))
-            .catch(err => Promise.resolve(handler()).then(() => { throw err; }));
+            .tap(value => Promise.resolve(handler()).return(value))
+            .catch(err => Promise.resolve(handler()).throw(err));
     },
 
     catch<T>(this: Promise<T>, errorCls: Function, onReject: (error: any) => T | Promise<T>): Promise<T> {
@@ -27,10 +27,15 @@ Object.assign(Promise.prototype, {
     },
 
     tap<T>(this: Promise<T>, handler: (result: T) => any): Promise<T> {
-        return this.then(result => {
-            handler(result);
-            return result;
-        });
+        return this.then(value => Promise.resolve(handler(value)).return(value));
+    },
+
+    return<T, U>(this: Promise<T>, value: U): Promise<U> {
+        return this.then(() => value);
+    },
+
+    throw<T>(this: Promise<T>, err: any): Promise<never> {
+        return this.then(() => { throw err; });
     },
 
     map<T, R>(this: Promise<T[]>, iterator: (item: T, index: number) => R | PromiseLike<R>): Promise<R[]> {

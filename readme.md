@@ -8,4 +8,6 @@ The total package size of bluefill is under 400 bytes. We supply the following m
  - [`.finally`](http://bluebirdjs.com/docs/api/finally.html)
  - [`.map`](http://bluebirdjs.com/docs/api/promise.map.html) (both as a static call and a chainable promise method)
  - [`.tap`](http://bluebirdjs.com/docs/api/tap.html)
+ - [`.return`](http://bluebirdjs.com/docs/api/return.html)
+ - [`.throw`](http://bluebirdjs.com/docs/api/throw.html)
 
