@@ -1,0 +1,39 @@
+{
+  "name": "bluefill",
+  "version": "0.1.0",
+  "description": "Bluebird-like promise polyfills with TypeScript definition support",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "test": "npm run -s clean && mocha --compilers ts:ts-node/register test.ts",
+    "clean": "rm -f *.js",
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WatchBeam/bluefill.git"
+  },
+  "keywords": [
+    "bluebird",
+    "promise",
+    "polyfill",
+    "typescript"
+  ],
+  "author": "Connor Peet <connor@peet.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WatchBeam/bluefill/issues"
+  },
+  "homepage": "https://github.com/WatchBeam/bluefill#readme",
+  "devDependencies": {
+    "@types/chai": "^3.5.1",
+    "@types/chai-as-promised": "0.0.30",
+    "@types/mocha": "^2.2.41",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "mocha": "^3.3.0",
+    "ts-node": "^3.0.2",
+    "typescript": "^2.2.2"
+  }
+}
