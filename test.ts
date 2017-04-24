@@ -93,6 +93,7 @@ describe('Promise.tap', () => {
         let tappedResult: number;
         return expect(
             Promise.resolve(2).tap(r => {
+                expect(r).to.equal(2);
                 tappedResult = r;
                 return r * 2;
             })
@@ -138,5 +139,16 @@ describe('Promise.map', () => {
         return expect(
             Promise.resolve('wut').map((item: number) => item * 2)
         ).to.eventually.rejectedWith(/Expected array of items/);
+    });
+});
+
+describe('Promise.return/throw', () => {
+    it('returns', () => {
+        return expect(Promise.resolve(1).return(2)).to.eventually.equal(2);
+    });
+
+    it('throws', () => {
+        const err = new FooError();
+        return expect(Promise.resolve(1).throw(err)).to.eventually.rejectedWith(err);
     });
 });

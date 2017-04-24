@@ -34,7 +34,19 @@ interface Promise<T> {
      * Takes an array of items from the previous promise, running the iterator
      * function over all of them with maximal concurrency.
      */
-    map<T, R>(iterator: (item: T, index: number) => R | PromiseLike<R>): Promise<R[]>;
+    map<U, R>(iterator: (item: U, index: number) => R | PromiseLike<R>): Promise<R[]>;
+
+    /**
+     * Convenience method for .then(() => value);
+     * @see http://bluebirdjs.com/docs/api/return.html
+     */
+    return<R>(value: R): Promise<R>;
+
+    /**
+     * Convenience method for .then(() => { throw value; });
+     * @see http://bluebirdjs.com/docs/api/throw.html
+     */
+    throw(value: any): Promise<never>;
 }
 
 interface PromiseConstructor {
