@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "es5",
+      "es6"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "mocha"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
