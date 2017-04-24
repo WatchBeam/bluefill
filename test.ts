@@ -53,6 +53,18 @@ describe('Promise.catch', () => {
         return expect(Promise.reject(err).catch(Error, () => ok))
             .to.eventually.equal(ok);
     });
+
+    it('catches by a predicate if passes', () => {
+        const err = new FooError();
+        return expect(Promise.reject(err).catch(() => true, () => ok))
+            .to.eventually.equal(ok);
+    });
+
+    it('rejects by a predicate if fails', () => {
+        const err = new FooError();
+        return expect(Promise.reject(err).catch(() => false, () => ok))
+            .to.eventually.be.rejectedWith(err);
+    });
 });
 
 describe('Promise.finally', () => {

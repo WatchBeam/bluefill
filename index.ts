@@ -8,12 +8,17 @@ Object.assign(Promise.prototype, {
     },
 
     catch<T>(this: Promise<T>, errorCls: Function, onReject: (error: any) => T | Promise<T>): Promise<T> {
-        if (errorCls !== Error && !(errorCls.prototype instanceof Error)) {
+        let predicate: (err: any) => boolean;
+        if (errorCls === Error || (errorCls.prototype instanceof Error)) { // Error constructor as predicate
+            predicate = err => err instanceof errorCls;
+        } else if (typeof onReject === 'function') { // Got two functions, handmade predicate
+            predicate = <any> errorCls;
+        } else { // A "standard", predicate-less catch.
             return originalCatch.apply(this, arguments);
         }
 
         return originalCatch.call(this, (err: Error) => {
-            if (!(err instanceof errorCls)) {
+            if (!predicate(err)) {
                 throw err;
             }
 

@@ -4,7 +4,7 @@ Bluefill is a polyfill designed for browsers and TypeScript to add promise utili
 
 The total package size of bluefill is under 400 bytes. We supply the following methods:
 
- - [`.catch`](http://bluebirdjs.com/docs/api/catch.html) with the ability to filter by Error classes as predicates.
+ - [`.catch`](http://bluebirdjs.com/docs/api/catch.html) with the ability to filter by Error classes or subclasses, or function predicates.
  - [`.finally`](http://bluebirdjs.com/docs/api/finally.html)
  - [`.map`](http://bluebirdjs.com/docs/api/promise.map.html) (both as a static call and a chainable promise method)
  - [`.tap`](http://bluebirdjs.com/docs/api/tap.html)
