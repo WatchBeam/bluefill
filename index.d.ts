@@ -19,6 +19,7 @@ interface Promise<T> {
      *
      * @see http://bluebirdjs.com/docs/api/catch.html
      */
+    catch<U>(predicate: (err: any) => boolean, onReject: (err: any) => U | PromiseLike<U>): Promise<U | T>;
     catch<E extends Error, U>(errorCls: { new(...args: any[]): E }, onReject: (error: E) => U | PromiseLike<U>): Promise<U | T>;
     catch<E extends Error>(errorCls: { new(...args: any[]): E }, onReject: (error: E) => T | PromiseLike<T> | void | PromiseLike<void>): Promise<T>;
 
