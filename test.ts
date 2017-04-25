@@ -138,7 +138,7 @@ describe('Promise.map', () => {
     it('throws if a non-array is provided', () => {
         return expect(
             Promise.resolve('wut').map((item: number) => item * 2)
-        ).to.eventually.rejectedWith(/Expected array of items/);
+        ).to.eventually.rejectedWith(/Expected array in Promise\.map/);
     });
 });
 
