@@ -147,6 +147,10 @@ describe('Promise.return/throw', () => {
         return expect(Promise.resolve(1).return(2)).to.eventually.equal(2);
     });
 
+    it('allows void returns', () => {
+        return expect(Promise.resolve(1).return()).to.eventually.be.undefined;
+    });
+
     it('throws', () => {
         const err = new FooError();
         return expect(Promise.resolve(1).throw(err)).to.eventually.rejectedWith(err);

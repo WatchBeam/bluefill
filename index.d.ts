@@ -40,6 +40,7 @@ interface Promise<T> {
      * Convenience method for .then(() => value);
      * @see http://bluebirdjs.com/docs/api/return.html
      */
+    return(): Promise<void>;
     return<R>(value: R): Promise<R>;
 
     /**
