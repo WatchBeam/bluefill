@@ -1,4 +1,4 @@
-# bluefill [![Build Status](https://travis-ci.org/WatchBeam/bluefill.svg?branch=master)](https://travis-ci.org/WatchBeam/bluefill)
+# bluefill [![Build Status](https://travis-ci.org/mixer/bluefill.svg?branch=master)](https://travis-ci.org/mixer/bluefill)
 
 Bluefill is a polyfill designed for browsers and TypeScript to add promise utility methods such as those found in [Bluebird](http://bluebirdjs.com). We do not aim for total compatibility with Bluebird or take pains to ensure extremely high performance, rather we optimize for a small browser package based solely on the Promise implementation found in the browser.
 
