@@ -1,6 +1,6 @@
 {
   "name": "bluefill",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Bluebird-like promise polyfills with TypeScript definition support",
   "main": "index.js",
   "typings": "index.d.ts",
