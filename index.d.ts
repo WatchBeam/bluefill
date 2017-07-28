@@ -48,6 +48,15 @@ interface Promise<T> {
      * @see http://bluebirdjs.com/docs/api/throw.html
      */
     throw(value: any): Promise<never>;
+
+    /**
+     * Returns a promise that will be fulfilled with this promise's fulfillment
+     * value or rejection reason. However, if this promise is not fulfilled or
+     * rejected within ms milliseconds, the returned promise is rejected with
+     * a TimeoutError or the `reason` as the reason.
+     * @see http://bluebirdjs.com/docs/api/timeout.html
+     */
+    timeout(duration: number, reason?: Error): Promise<T>;
 }
 
 interface PromiseConstructor {
@@ -55,4 +64,9 @@ interface PromiseConstructor {
      * 'static' implementation of `Promise.map`
      */
     map<T, R>(items: T[], iterator: (item: T, index: number) => R | PromiseLike<R>): Promise<R[]>;
+
+    /**
+     * TimeoutError is thrown by Promise.timeout.
+     */
+    TimeoutError: new () => Error;
 }

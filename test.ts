@@ -156,3 +156,20 @@ describe('Promise.return/throw', () => {
         return expect(Promise.resolve(1).throw(err)).to.eventually.rejectedWith(err);
     });
 });
+
+describe('Promise.timeout', () => {
+    it('returns', () => {
+        return expect(Promise.resolve(2).timeout(1)).to.eventually.equal(2);
+    });
+
+    it('times out', () => {
+        return expect(new Promise(() => {}).timeout(1))
+            .to.eventually.rejectedWith(Promise.TimeoutError);
+    });
+
+    it('times out with a custom cause', () => {
+        const cause = new Error();
+        return expect(new Promise(() => {}).timeout(1, cause))
+            .to.eventually.rejectedWith(cause);
+    });
+});

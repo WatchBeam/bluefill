@@ -1,5 +1,13 @@
 const originalCatch = Promise.prototype.catch;
 
+function TimeoutError(this: Error) {
+    const err = Error.call(this, 'operation timed out');
+    this.stack = err.stack;
+    this.message = err.message;
+};
+
+TimeoutError.prototype = Object.create(Error.prototype);
+
 Object.assign(Promise.prototype, {
     finally<T>(this: Promise<T>, handler: () => any): Promise<T> {
         return this
@@ -41,9 +49,21 @@ Object.assign(Promise.prototype, {
     map<T, R>(this: Promise<T[]>, iterator: (item: T, index: number) => R | PromiseLike<R>): Promise<R[]> {
         return this.then(items => Promise.map(items, iterator));
     },
+
+    timeout<T>(this: Promise<T>, duration: string, cause?: Error): Promise<T> {
+        let reject: (err: Error) => void;
+        cause = cause || new Promise.TimeoutError();
+        const timeout = setTimeout(() => reject(cause!), duration);
+
+        return Promise.race([
+            this.tap(() => clearTimeout(timeout)),
+            new Promise<T>((_resolve, rej) => reject = rej),
+        ]);
+    },
 });
 
 Object.assign(Promise, {
+    TimeoutError,
     map<T, R>(items: T[], iterator: (item: T, index: number) => R | PromiseLike<R>): Promise<R[]> {
         if (!Array.isArray(items)) {
             throw new Error(`Expected array in Promise.map, Got: ${items}`);
